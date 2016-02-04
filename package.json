@@ -1,0 +1,16 @@
+{
+  "name": "jirapi",
+  "version": "1.0.0",
+  "description": "Jira API client in nodejs with common dayly tasks",
+  "main": "jirapi.js",
+  "dependencies": {
+    "jira-client": "^1.3.1",
+    "prompt": "^0.2.14"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "vcarluer@gmail.com",
+  "license": "ISC"
+}
