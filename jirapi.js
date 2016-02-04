@@ -5,15 +5,25 @@ var fs = require("fs");
 var action = "";
 if (process.argv.length > 2){
 	action = process.argv[2];
-	if (action === "configure") {
+	if (action.toLowerCase() === "configure") {
 		configure();
 		return;
 	}
 
-	if (action === "progress") {
+	if (action.toLowerCase() === "progress") {
 		getInProgress();
 		return;
 	}
+
+	if (action.toLowerCase() === "help") {
+		console.log("Usage node jirapi COMMAND");
+		console.log("Command list:");
+		console.log("Configure: Call this first to store your configuration settings");
+		console.log("Progress: Get your tasks in progress");
+		return;
+	}
+} else {
+	console.log("Use Help to get command list with 'node jirapi help'");
 }
 
 function configure() {
