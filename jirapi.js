@@ -1,6 +1,10 @@
 var JiraApi = require('jira-client');
 var prompt = require('prompt');
 var fs = require("fs");
+var path = require("path");
+
+var configDir = path.join("c:", "ProgramData", "jirapi");
+var configPath = path.join(configDir, "config");
 
 var action = "";
 if (process.argv.length > 2){
@@ -42,12 +46,21 @@ function configure() {
 	prompt.start();
 
 	prompt.get(schema, function(err, result) {
-		fs.writeFileSync(".\\config", JSON.stringify(result));
+		mkdirSync(configDir);
+		fs.writeFileSync(configPath, JSON.stringify(result));
 	});
 }
 
+function mkdirSync(path) {
+	try {
+		fs.mkdirSync(path);
+	} catch(e) {
+		if ( e.code != 'EEXIST' ) throw e;
+	}
+}
+
 function readConfig() {
-	var conf = fs.readFileSync(".\\config");
+	var conf = fs.readFileSync(configPath);
 	var config = JSON.parse(conf);
 	return config;
 }
