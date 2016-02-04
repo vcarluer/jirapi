@@ -24,6 +24,13 @@ if (process.argv.length > 2){
 		console.log("Command list:");
 		console.log("Configure: Call this first to store your configuration settings");
 		console.log("Progress: Get your tasks in progress");
+		console.log("Info [KEY]: Get the information on task by key");
+		return;
+	}
+
+	if (action.toLowerCase() === "info") {
+		key = process.argv[3];
+		getInfo(key);
 		return;
 	}
 } else {
@@ -94,5 +101,27 @@ function getInProgress() {
 		// console.log(err);
 		console.log("Error");
 	});
+}
+
+function getInfo(key) {
+	var configuration = readConfig();
+	var jira = new JiraApi({
+			protocol:configuration.protocol,
+			host:configuration.host,
+			port:configuration.port,
+			username:configuration.username,
+			password:configuration.password,
+			apiVersion: '2',
+			strictSSL: false
+	});
+
+			jira.findIssue(key)
+			.then(issue => {
+				console.log(issue.fields.description);
+			})
+			.catch(err => {
+				// console.log(err);
+				console.log("Error");
+			});
 }
 
