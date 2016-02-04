@@ -1,0 +1,9 @@
+Dependencies
+Nodejs 5.5.0 >
+
+Installation
+git clone https://github.com/vcarluer/jirapi.git .\jirapi
+npm install
+
+Usage
+node jirapi help
